@@ -34,7 +34,7 @@ class Account < ApplicationRecord
         position: account.position
       }
     }
-   # Producer.call(event.to_json, topic: 'accounts-stream')
+    Producer.call(event.to_json, topic: 'accounts-stream')
     # --------------------------------------------------------------------
   end
 end

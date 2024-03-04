@@ -2,6 +2,7 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_account!, only: [:index]
+#  before_action :doorkeeper_authorize!, only: [:owner]
 
   # GET /accounts
   # GET /accounts.json
@@ -42,7 +43,7 @@ class AccountsController < ApplicationController
         if new_role
           event = {
             event_name: 'AccountRoleChanged',
-            data: { public_id: public_id, role: role }
+            data: { public_id: @account.public_id, role: @account.role }
           }
           Producer.call(event.to_json, topic: 'accounts')
         end

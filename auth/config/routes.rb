@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   root to: 'accounts#index'
 
-  resources :accounts, only: [:edit, :update, :destroy]
+  resources :accounts, only: [:edit, :update, :destroy] do
+    collection do
+      get :owner
+    end
+  end
   get '/accounts/current', to: 'accounts#current'
 end
